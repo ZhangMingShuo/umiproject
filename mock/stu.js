@@ -21,9 +21,22 @@ export default {
   'Get /classes/stu':dataList,
   'Delete /classes/stu':(req,res)=>{
     console.log(req.query);
+    let {id} = req.query
+
+    for(let i = 0;i<dataList.data.length;i++){
+      if(dataList.data[i].objectId == id){
+        dataList.data.splice(i,1)
+        res.send({
+          code:200,
+          msg:'删除成功'
+        })
+        return
+      }
+    }
     res.send({
-      code:200,
-      msg:'删除成功'
+      code:100,
+      msg:'未找到对应数据'
     })
+
   }
 }
