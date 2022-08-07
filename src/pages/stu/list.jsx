@@ -1,5 +1,6 @@
-import { Space, Table, Tag } from 'antd';
-import React from 'react';
+import {Button, Space, Table, Tag} from 'antd';
+import React,{useState,useEffect} from 'react';
+import {stuGet} from '@/api/stu';
 const columns = [
   {
     title: '姓名',
@@ -28,23 +29,32 @@ const columns = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <Button type="primary" shape="round" size="small">编辑</Button>
+        <Button type="primary" danger size="small">删除</Button>
       </Space>
     ),
   },
 ];
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    score: 100,
-    city:'重庆',
-    time: '2022-10-10',
-  }
-];
+
+// const data = [
+//   {
+//     key: '1',
+//     name: 'John Brown',
+//     score: 100,
+//     city:'重庆',
+//     time: '2022-10-10',
+//   }
+// ];
 
 export default function StuList() {
+  let  [data,setData] = useState([]);
+  useEffect(() => {
+    stuGet().then(res=>{
+      console.log(res);
+      setData(res.data);
+    })
+  }, []);
+
   return (
     <Table columns={columns} dataSource={data} />
   );
