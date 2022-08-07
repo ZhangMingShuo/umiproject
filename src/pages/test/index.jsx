@@ -1,10 +1,11 @@
 import React from 'react';
 import {Button} from 'antd';
+import {Link,history} from 'umi';
 export default function Test() {
     return (
       <div>
-        test1
-        <Button type="primary">按钮</Button>
+        <Link to = "/">test1</Link>
+        <Button type="primary" onClick={()=>{history.push('/')}}>按钮</Button>
       </div>
     );
 }
