@@ -55,7 +55,7 @@ export default function StuList() {
     },
   ];
 
-  let  [data,setData] = useState([]);
+  let [data,setData] = useState([]);
   useEffect(() => {
     stuGet().then(res=>{
       console.log(res);

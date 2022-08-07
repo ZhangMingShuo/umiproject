@@ -1,23 +1,6 @@
-# umi project
+// umi 运行时配置
 
-## Getting Started
-
-Install dependencies,
-
-```bash
-$ yarn
-```
-
-Start the dev server,
-
-```bash
-$ yarn start
-```
-
-为request配置请求拦截器与响应拦截器  
-[umi的运行时配置](https://v3.umijs.org/zh-CN/docs/runtime-config)  
-约定`src/app.tx`为运行时配置
-```js
+// 异步请求相关运行时配置
 export const request = {
   requestInterceptors:[//请求拦截
     (url,options)=>{
@@ -33,5 +16,3 @@ export const request = {
     }
   ]
 }
-``` 
-
