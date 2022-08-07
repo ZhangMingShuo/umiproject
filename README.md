@@ -35,3 +35,6 @@ export const request = {
 }
 ``` 
 
+LeanCloud云服务介绍及应用容器创建
+
+![LeanCloud](img/leancloud.png)
