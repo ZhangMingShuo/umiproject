@@ -38,3 +38,7 @@ export const request = {
 LeanCloud云服务介绍及应用容器创建
 
 ![LeanCloud](img/leancloud.png)
+
+LeanCloud Restful风格API介绍及使用  
+[LeanCloud rest_api](https://leancloud.cn/docs/rest_api.html) 
+LeanCloud文档-RESTAPI-数据存储RESTAPI-对象-创建对象
