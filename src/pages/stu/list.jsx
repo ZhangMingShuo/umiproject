@@ -1,6 +1,6 @@
 import {Button, Space, Table, Tag} from 'antd';
 import React,{useState,useEffect} from 'react';
-import {stuGet} from '@/api/stu';
+import {stuGet,stuDel} from '@/api/stu';
 const columns = [
   {
     title: '姓名',
@@ -27,10 +27,14 @@ const columns = [
   {
     title: '操作区域',
     key: 'action',
-    render: (_, record) => (
+    render: (text, record, index) => (
       <Space size="middle">
         <Button type="primary" shape="round" size="small">编辑</Button>
-        <Button type="primary" danger size="small">删除</Button>
+        <Button type="primary" danger size="small" onClick={()=>{
+          stuDel(record.objectId).then(res=>{
+            console.log(res);
+          })
+        }}>删除</Button>
       </Space>
     ),
   },

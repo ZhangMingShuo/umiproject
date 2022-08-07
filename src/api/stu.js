@@ -6,3 +6,9 @@ export const stuGet =  () => {
     })
 }
 
+export const stuDel =  (id) => {
+  return request(
+    `/classes/stu?id=${id}`, {
+      method:'DELETE'
+    })
+}
