@@ -10,6 +10,7 @@ export default {
     msg: '学员列表加载成功',
     'data|100':[
       {
+        'objectId|+1':1,
         name:'@cname',
         score:'@integer(50,100)',
         city:'@city',

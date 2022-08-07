@@ -56,6 +56,6 @@ export default function StuList() {
   }, []);
 
   return (
-    <Table columns={columns} dataSource={data} />
+    <Table columns={columns} dataSource={data} rowKey="objectId" />
   );
 }
