@@ -1,4 +1,4 @@
-import { Button, Space, Table, Tag } from 'antd';
+import { Button, Space, Table } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { stuGet, stuDel } from '@/api/stu';
 
@@ -64,12 +64,21 @@ export default function StuList() {
   ];
 
   let [data, setData] = useState([]);
+  let [loading, setLoading] = useState(true);
   useEffect(() => {
     stuGet().then((res) => {
       console.log(res);
       setData(res.results);
+      setLoading(false);
     });
   }, []);
 
-  return <Table columns={columns} dataSource={data} rowKey="objectId" />;
+  return (
+    <Table
+      loading={loading}
+      columns={columns}
+      dataSource={data}
+      rowKey="objectId"
+    />
+  );
 }
