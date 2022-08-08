@@ -78,6 +78,7 @@ export default function StuList() {
   //   return {data:res.results}
   // })
 
+  //根据useRequest方法的要求处理数据包格式
   const { data, loading, error } = useRequest(stuGet); //data是后端响应的数据包{data:[]},loading是异步请求状态,error是异步请求失败的返回结果
   return (
     <Table
