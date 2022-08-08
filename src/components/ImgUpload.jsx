@@ -2,8 +2,8 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import React, { useState } from 'react';
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
+const getBase64 = (img, callback) => { //将本地资源对象转换为base64编码
+  const reader = new FileReader();//原生js方法
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 };
@@ -86,20 +86,34 @@ class ImageUpload extends React.Component{
     loading : false
   };
 
-  handleChange = (info) => {//监控接口上传进度
-    if (info.file.status === 'uploading') {
-      setLoading(true);
-      return;
-    }
+  // handleChange = (info) => {//监控接口上传进度
+  //   if (info.file.status === 'uploading') {
+  //     this.setState({ loading : true })
+  //     return;
+  //   }
+  //
+  //   if (info.file.status === 'done') {
+  //     // Get this url from response in real world.
+  //     getBase64(info.file.originFileObj, (url) => {
+  //       this.setState({
+  //         imageUrl,
+  //         loading : false,
+  //       })
+  //     });
+  //   }
+  // };
 
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
+  customUpload = (info) => {
+    console.log(info)
+    this.setState({ loading : true })
+    getBase64(info.file,(base64)=>{
+      console.log(base64)
+      this.setState({
+        loading:false,
+        imageUrl:base64
+      })
+    })
+  }
 
   //初始状态imageUrl为undefined渲染uploadButton,上传后imageUrl有值则根据图片链接渲染图片
   render() {
@@ -117,7 +131,7 @@ class ImageUpload extends React.Component{
         listType="picture-card"
         className="avatar-uploader"
         showUploadList={false}
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        customRequest={this.customUpload}
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
       >
