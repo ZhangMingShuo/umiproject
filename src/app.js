@@ -15,9 +15,10 @@ export const request = {
 
   responseInterceptors: [
     //响应拦截
-    (response, options) => {
-      console.log('请求拦截器', response, options);
-      return response;
+    async (response, options) => {
+      let res = await response.json();
+      console.log('响应拦截器', res, options);
+      return { data: res.results };
     },
   ],
 };

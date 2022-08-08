@@ -1,7 +1,7 @@
 import { Button, Space, Table } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { stuGet, stuDel } from '@/api/stu';
-
+import { useRequest } from 'umi';
 // const data = [
 //   {
 //     key: '1',
@@ -63,16 +63,22 @@ export default function StuList() {
     },
   ];
 
-  let [data, setData] = useState([]);
-  let [loading, setLoading] = useState(true);
-  useEffect(() => {
-    stuGet().then((res) => {
-      console.log(res);
-      setData(res.results);
-      setLoading(false); //关闭Loading
-    });
-  }, []);
+  // let [data, setData] = useState([]);
+  // let [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   stuGet().then((res) => {
+  //     console.log(res);
+  //     setData(res.results);
+  //     setLoading(false); //关闭Loading
+  //   });
+  // }, []);
 
+  // let {data,loading,error} = useRequest(async()=>{
+  //   let res = await stuGet();
+  //   return {data:res.results}
+  // })
+
+  const { data, loading, error } = useRequest(stuGet); //data是后端响应的数据包{data:[]},loading是异步请求状态,error是异步请求失败的返回结果
   return (
     <Table
       loading={loading}
