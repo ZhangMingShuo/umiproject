@@ -20,11 +20,12 @@ const tailLayout = {
 
 const CatePub = () => {
   const [form] = Form.useForm();
-  let {data,loading,run} = useRequest(()=>{
-    console.log('useRequest执行了');
+  let {data,loading,run} = useRequest((value)=>{
+    console.log('useRequest执行了',value);
+    return cateAdd(value)
   },{manual:true});//开启手动执行
   const onFinish = (values) => {
-    run()
+    run(values)
     // console.log('values:', values);
     // cateAdd(values).then((res) => {
     //   console.log('cateAdd', res);
