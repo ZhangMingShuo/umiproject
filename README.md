@@ -222,3 +222,11 @@ LeanCloud文档-RESTAPI-数据存储RESTAPI-对象-创建对象
     }
 ]
 ```
+
+在umi配置LeanCloud服务接口  
+数据存储
+![数据存储](img/storageData.png)
+创建Class
+![创建Class](img/createClass.png)
+新增一条数据
+![新增数据](img/dataList.png)

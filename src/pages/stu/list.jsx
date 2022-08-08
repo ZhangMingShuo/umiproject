@@ -1,7 +1,6 @@
-import {Button, Space, Table, Tag} from 'antd';
-import React,{useState,useEffect} from 'react';
-import {stuGet,stuDel} from '@/api/stu';
-
+import { Button, Space, Table, Tag } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { stuGet, stuDel } from '@/api/stu';
 
 // const data = [
 //   {
@@ -35,35 +34,42 @@ export default function StuList() {
       title: '生日',
       key: 'time',
       dataIndex: 'time',
-
     },
     {
       title: '操作区域',
       key: 'action',
       render: (text, record, index) => (
         <Space size="middle">
-          <Button type="primary" shape="round" size="small">编辑</Button>
-          <Button type="primary" danger size="small" onClick={()=>{
-            stuDel(record.objectId).then(res=>{//删除线上
-              console.log(res);
-              data.splice(index,1)//更新线下
-              setData([...data])
-            })
-          }}>删除</Button>
+          <Button type="primary" shape="round" size="small">
+            编辑
+          </Button>
+          <Button
+            type="primary"
+            danger
+            size="small"
+            onClick={() => {
+              stuDel(record.objectId).then((res) => {
+                //删除线上
+                console.log(res);
+                data.splice(index, 1); //更新线下
+                setData([...data]);
+              });
+            }}
+          >
+            删除
+          </Button>
         </Space>
       ),
     },
   ];
 
-  let [data,setData] = useState([]);
+  let [data, setData] = useState([]);
   useEffect(() => {
-    stuGet().then(res=>{
+    stuGet().then((res) => {
       console.log(res);
-      setData(res.data);
-    })
+      setData(res.results);
+    });
   }, []);
 
-  return (
-    <Table columns={columns} dataSource={data} rowKey="objectId" />
-  );
+  return <Table columns={columns} dataSource={data} rowKey="objectId" />;
 }
