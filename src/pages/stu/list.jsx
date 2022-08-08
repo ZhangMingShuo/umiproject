@@ -69,7 +69,7 @@ export default function StuList() {
     stuGet().then((res) => {
       console.log(res);
       setData(res.results);
-      setLoading(false);
+      setLoading(false); //关闭Loading
     });
   }, []);
 
