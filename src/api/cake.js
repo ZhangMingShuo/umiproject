@@ -5,3 +5,10 @@ export const cateAdd = (cateObj) => {
     data: cateObj,
   });
 };
+
+export const bannerAdd = (bannerObj) => {
+  return request('/classes/CakeBanner', {
+    method: 'POST',
+    data: bannerObj,
+  });
+};

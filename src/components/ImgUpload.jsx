@@ -114,9 +114,11 @@ class ImageUpload extends React.Component {
       console.log(file.name());
       file.save().then((res) => {
         console.log(res);
+        let { url } = res.attributes;
+        this.props.onChange(url); //把图片链接从自定义组件传到父组件,上传表单组件,onChange是Form内置的函数
         this.setState({
           loading: false,
-          imageUrl: res.attributes.url, //预览在线图片
+          imageUrl: url, //预览在线图片
         });
       });
     });
@@ -125,6 +127,7 @@ class ImageUpload extends React.Component {
   //初始状态imageUrl为undefined渲染uploadButton,上传后imageUrl有值则根据图片链接渲染图片
   render() {
     const { loading, imageUrl } = this.state;
+    console.log('ImgUpload组件的props', this.props);
     const uploadButton = (
       <div>
         {loading ? <LoadingOutlined /> : <PlusOutlined />}
