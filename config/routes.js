@@ -56,6 +56,12 @@ export default [
         component: '@/pages/banner/pub',
         name: '轮播发布',
       },
+      {
+        path: '/banner/edit',
+        component: '@/pages/banner/edit',
+        name: '轮播编辑',
+        hideInMenu: true,
+      },
     ],
   },
 ];

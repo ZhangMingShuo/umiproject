@@ -1,7 +1,7 @@
 import { Button, Space, Table, Image } from 'antd';
 import React from 'react';
 import { bannerGet } from '@/api/cake';
-import { useRequest } from 'umi';
+import { useRequest, history } from 'umi';
 
 export default function BannerList() {
   const columns = [
@@ -37,7 +37,18 @@ export default function BannerList() {
       key: 'action',
       render: (text, record, index) => (
         <Space size="middle">
-          <Button type="primary" shape="round" size="small">
+          <Button
+            type="primary"
+            shape="round"
+            size="small"
+            onClick={() => {
+              //使用history的push方法完成跳转,需要把当前待编辑的数据包通过路由传参带到下一个页面
+              history.push({
+                pathname: '/banner/edit',
+                query: record,
+              });
+            }}
+          >
             编辑
           </Button>
           <Button
