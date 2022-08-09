@@ -18,3 +18,10 @@ export const bannerGet = () => {
     method: 'GET',
   });
 };
+
+export const bannerUpdate = (objectId, bannerObj) => {
+  return request('/classes/CakeBanner', {
+    method: 'PUT',
+    data: bannerObj,
+  });
+};

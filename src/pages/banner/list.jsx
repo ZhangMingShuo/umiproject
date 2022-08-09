@@ -42,6 +42,7 @@ export default function BannerList() {
             shape="round"
             size="small"
             onClick={() => {
+              // console.log("进入编辑详情页")
               //使用history的push方法完成跳转,需要把当前待编辑的数据包通过路由传参带到下一个页面
               history.push({
                 pathname: '/banner/edit',
@@ -51,19 +52,7 @@ export default function BannerList() {
           >
             编辑
           </Button>
-          <Button
-            type="primary"
-            danger
-            size="small"
-            onClick={() => {
-              stuDel(record.objectId).then((res) => {
-                //删除线上
-                console.log(res);
-                data.splice(index, 1); //更新线下
-                setData([...data]);
-              });
-            }}
-          >
+          <Button type="primary" danger size="small">
             删除
           </Button>
         </Space>

@@ -24,63 +24,6 @@ const beforeUpload = (file) => {
 
   return isJpgOrPng && isLt2M;
 };
-/*
-const ImageUpload = () => {
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
-
-  const handleChange = (info) => {
-    if (info.file.status === 'uploading') {
-      setLoading(true);
-      return;
-    }
-
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </div>
-  );
-  return (
-    <Upload
-      name="avatar"
-      listType="picture-card"
-      className="avatar-uploader"
-      showUploadList={false}
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      beforeUpload={beforeUpload}
-      onChange={handleChange}
-    >
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt="avatar"
-          style={{
-            width: '100%',
-          }}
-        />
-      ) : (
-        uploadButton
-      )}
-    </Upload>
-  );
-};
-*/
 
 class ImageUpload extends React.Component {
   state = {
@@ -88,29 +31,12 @@ class ImageUpload extends React.Component {
     loading: false,
   };
 
-  // handleChange = (info) => {//监控接口上传进度
-  //   if (info.file.status === 'uploading') {
-  //     this.setState({ loading : true })
-  //     return;
-  //   }
-  //
-  //   if (info.file.status === 'done') {
-  //     // Get this url from response in real world.
-  //     getBase64(info.file.originFileObj, (url) => {
-  //       this.setState({
-  //         imageUrl,
-  //         loading : false,
-  //       })
-  //     });
-  //   }
-  // };
-
   customUpload = (info) => {
     console.log(info);
-    this.setState({ loading: true });
+    this.setState({ loading: true }); //未上传完成设置loading为true
     getBase64(info.file, (base64) => {
       console.log(base64);
-      const file = new Cloud.File('cakeimg.png', { base64 });
+      const file = new Cloud.File('cakeimg.png', { base64 }); //调用LeanCloud SDK
       console.log(file.name());
       file.save().then((res) => {
         console.log(res);
@@ -118,7 +44,7 @@ class ImageUpload extends React.Component {
         this.props.onChange(url); //把图片链接从自定义组件传到父组件,上传表单组件,onChange是Form内置的函数
         this.setState({
           loading: false,
-          imageUrl: url, //预览在线图片
+          imgurl: url, //预览在线图片
         });
       });
     });
@@ -126,8 +52,12 @@ class ImageUpload extends React.Component {
 
   //初始状态imageUrl为undefined渲染uploadButton,上传后imageUrl有值则根据图片链接渲染图片
   render() {
-    const { loading, imageUrl } = this.state;
-    console.log('ImgUpload组件的props', this.props);
+    // console.log('ImgUpload start render() : ');
+    // console.log('ImgUpload this.state : ',this.state);
+    const { loading, imgurl } = this.state;
+    // console.log('loading:',loading);
+    console.log('ImgUpload的imgurl:', this.props.imgurl);
+    // console.log('ImgUpload组件的props', this.props);
     const uploadButton = (
       <div>
         {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -145,8 +75,8 @@ class ImageUpload extends React.Component {
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
       >
-        {imageUrl ? (
-          <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+        {this.props.imgurl ? (
+          <img src={this.props.imgurl} alt="avatar" style={{ width: '100%' }} />
         ) : (
           uploadButton
         )}

@@ -20,9 +20,10 @@ const tailLayout = {
 };
 
 const BannerEdit = (props) => {
-  const [form] = Form.useForm();
+  console.log('BannerEdit----------------');
+  const [form] = Form.useForm(); //表单数据域
   let { query } = props.location;
-
+  console.log('query comes from record of list:', query);
   let { data, loading, run } = useRequest(
     (value) => {
       // console.log('useRequest执行了',value);
@@ -47,11 +48,19 @@ const BannerEdit = (props) => {
   };
 
   useEffect(() => {
-    console.log('BannerEdit', props);
-    console.log('query', query);
+    //didmount didupdate
+
+    console.log('------------------- useEffect --------------------');
+    console.log('banner edit useEffect BannerEdit props:', props);
+    console.log('banner edit useEffect BannerEdit query:', query);
     //TODO
-    form.setFieldsValue(query);
+    // const {imgurl} = query;
+    // console.log('imgurl:',imgurl);
+    // const url = imgurl;
   }, []);
+
+  console.log('query.imgurl:', query.imgurl);
+  form.setFieldsValue(query);
 
   //表单初始值
   let initData = {
@@ -101,7 +110,7 @@ const BannerEdit = (props) => {
             },
           ]}
         >
-          <ImageUpload />
+          <ImageUpload imgurl={query.imgurl} />
         </Form.Item>
 
         <Form.Item {...tailLayout}>
