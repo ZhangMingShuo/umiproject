@@ -1,6 +1,7 @@
 // umi 运行时配置
 import { leancloudConfig } from '@/secrets';
-import { message } from 'antd'
+import { message } from 'antd';
+import './utils/init-leancloud-sdk';
 // 异步请求相关运行时配置
 export const request = {
   requestInterceptors: [
@@ -18,7 +19,7 @@ export const request = {
     async (response, options) => {
       let res = await response.json();
       console.log('响应拦截器', res, options);
-      if(res.objectId&&options.method.toLowerCase()=='post'){
+      if (res.objectId && options.method.toLowerCase() == 'post') {
         message.success('新增成功');
       }
       return { data: res.results };

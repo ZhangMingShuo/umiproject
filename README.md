@@ -374,3 +374,7 @@ const CatePub = () => {
 export default CatePub;
 
 ```
+LeanCloud JavaScript SDK  
+[javascript_sdk安装指南](https://leancloud.cn/docs/sdk_setup-js.html#hash117588)  
+[初始化](https://leancloud.cn/docs/sdk_setup-js.html#hash20935048)  
+[javascript_sdk使用指南](https://leancloud.cn/docs/leanstorage_guide-js.html)

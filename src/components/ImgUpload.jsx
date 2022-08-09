@@ -1,9 +1,10 @@
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
-import React, { useState } from 'react';
-
-const getBase64 = (img, callback) => { //将本地资源对象转换为base64编码
-  const reader = new FileReader();//原生js方法
+import React from 'react';
+import Cloud from 'leancloud-storage';
+const getBase64 = (img, callback) => {
+  //将本地资源对象转换为base64编码
+  const reader = new FileReader(); //原生js方法
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 };
@@ -81,9 +82,10 @@ const ImageUpload = () => {
 };
 */
 
-class ImageUpload extends React.Component{
-  state = {  //类组件内部属性简写
-    loading : false
+class ImageUpload extends React.Component {
+  state = {
+    //类组件内部属性简写
+    loading: false,
   };
 
   // handleChange = (info) => {//监控接口上传进度
@@ -104,16 +106,21 @@ class ImageUpload extends React.Component{
   // };
 
   customUpload = (info) => {
-    console.log(info)
-    this.setState({ loading : true })
-    getBase64(info.file,(base64)=>{
-      console.log(base64)
-      this.setState({
-        loading:false,
-        imageUrl:base64
-      })
-    })
-  }
+    console.log(info);
+    this.setState({ loading: true });
+    getBase64(info.file, (base64) => {
+      console.log(base64);
+      const file = new Cloud.File('cakeimg.png', { base64 });
+      console.log(file.name());
+      file.save().then((res) => {
+        console.log(res);
+        this.setState({
+          loading: false,
+          imageUrl: res.attributes.url, //预览在线图片
+        });
+      });
+    });
+  };
 
   //初始状态imageUrl为undefined渲染uploadButton,上传后imageUrl有值则根据图片链接渲染图片
   render() {
@@ -135,7 +142,11 @@ class ImageUpload extends React.Component{
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
       >
-        {imageUrl ? (<img src={imageUrl} alt="avatar" style={{ width: '100%',}}/>) : (uploadButton)}
+        {imageUrl ? (
+          <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+        ) : (
+          uploadButton
+        )}
       </Upload>
     );
   }
