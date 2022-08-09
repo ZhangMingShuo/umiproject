@@ -12,3 +12,9 @@ export const bannerAdd = (bannerObj) => {
     data: bannerObj,
   });
 };
+
+export const bannerGet = () => {
+  return request('/classes/CakeBanner', {
+    method: 'GET',
+  });
+};
