@@ -7,6 +7,7 @@ import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
 import RichEditor from '../../components/RichEditor';
 import axios from 'axios';
+import { mcakeConfig } from '@/secrets';
 const { Option } = Select;
 
 const layout = {
@@ -30,10 +31,17 @@ const GoodsPub = () => {
   const [form] = Form.useForm();
   let { data, loading, run } = useRequest(cateGet); //date是分类数据包
   const onFinish = (values) => {
-    console.log(values); //准备接收来自富文本编辑器组件RichEditor的商品详情数据
-    let url =
-      'https://h5.mcake.com/api/0434b49d1ac28f9d?cityId=110&page=1&bid=1';
-    axios.get(url).then((res) => {
+    // console.log(values); //准备接收来自富文本编辑器组件RichEditor的商品详情数据
+    // console.log(mcakeConfig)
+    //使用express代理获取第三方数据
+    axios({
+      url: mcakeConfig.catUrl,
+      method: 'get',
+      headers: {
+        'access-token': mcakeConfig.accessToken,
+        version: mcakeConfig.version,
+      },
+    }).then((res) => {
       console.log(res);
     });
     // goodsAdd(values).then(res=>{
