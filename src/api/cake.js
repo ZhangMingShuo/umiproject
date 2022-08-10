@@ -6,6 +6,12 @@ export const cateAdd = (cateObj) => {
   });
 };
 
+export const cateGet = () => {
+  return request('/classes/CakeCate', {
+    method: 'Get',
+  });
+};
+
 export const bannerAdd = (bannerObj) => {
   return request('/classes/CakeBanner', {
     method: 'POST',

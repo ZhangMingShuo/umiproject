@@ -69,4 +69,21 @@ export default [
       },
     ],
   },
+  {
+    path: '/goods',
+    name: '商品管理',
+    icon: 'CodeSandboxOutlined',
+    routes: [
+      {
+        path: '/goods/list',
+        component: '@/pages/goods/list',
+        name: '商品列表',
+      },
+      {
+        path: '/goods/pub',
+        component: '@/pages/goods/pub',
+        name: '商品发布',
+      },
+    ],
+  },
 ];
