@@ -27,9 +27,10 @@ const handleChange = (value) => {
 };
 const GoodsPub = () => {
   const [form] = Form.useForm();
-  let { data, loading } = useRequest(cateGet); //date是分类数据包
+  let { data, loading, run } = useRequest(cateGet); //date是分类数据包
   const onFinish = (values) => {
-    run(values);
+    console.log(values); //准备接收来自富文本编辑器的商品数据详情
+    // run(values);
     // console.log('values:', values);
     // cateAdd(values).then((res) => {
     //   console.log('cateAdd', res);
