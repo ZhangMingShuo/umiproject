@@ -31,3 +31,11 @@ export const bannerUpdate = (objectId, bannerObj) => {
     data: bannerObj,
   });
 };
+
+export const goodsAdd = (cakeObj) => {
+  //新增商品
+  return request('/classes/CakeGoods', {
+    method: 'POST',
+    data: cakeObj,
+  });
+};
