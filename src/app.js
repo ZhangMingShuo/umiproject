@@ -20,7 +20,11 @@ export const request = {
       let res = await response.json();
       console.log('响应拦截器', res, options);
       if (res.objectId && options.method.toLowerCase() == 'post') {
-        message.success('新增成功');
+        let method = options.method.toLowerCase();
+        let msg = method == 'post' ? '新增成功' : '更新成功';
+        if (method == 'post') {
+          message.success(msg);
+        }
       }
       return { data: res.results };
     },

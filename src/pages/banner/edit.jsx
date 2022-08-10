@@ -3,6 +3,7 @@ import { bannerAdd } from '@/api/cake';
 import React, { useEffect } from 'react';
 import { useRequest } from 'umi';
 import ImageUpload from '../../components/ImgUpload';
+import { bannerUpdate } from '../../api/cake';
 
 const layout = {
   labelCol: {
@@ -27,7 +28,7 @@ const BannerEdit = (props) => {
   let { data, loading, run } = useRequest(
     (value) => {
       // console.log('useRequest执行了',value);
-      return bannerAdd(value);
+      return bannerUpdate(props.location.query.objectId, value);
     },
     { manual: true },
   ); //开启手动执行

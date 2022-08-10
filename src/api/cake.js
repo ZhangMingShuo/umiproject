@@ -20,8 +20,8 @@ export const bannerGet = () => {
 };
 
 export const bannerUpdate = (objectId, bannerObj) => {
-  return request('/classes/CakeBanner', {
-    method: 'PUT',
+  return request(`/classes/CakeBanner/${objectId}`, {
+    method: 'Put',
     data: bannerObj,
   });
 };

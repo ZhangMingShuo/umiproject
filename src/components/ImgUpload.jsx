@@ -65,6 +65,8 @@ class ImageUpload extends React.Component {
       </div>
     );
 
+    let url = imgurl ? imgurl : this.props.imgurl;
+
     return (
       <Upload
         name="avatar"
@@ -75,8 +77,8 @@ class ImageUpload extends React.Component {
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
       >
-        {this.props.imgurl ? (
-          <img src={this.props.imgurl} alt="avatar" style={{ width: '100%' }} />
+        {url ? (
+          <img src={url} alt="avatar" style={{ width: '100%' }} />
         ) : (
           uploadButton
         )}
