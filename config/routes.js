@@ -4,15 +4,18 @@ export default [
     path: '/',
     component: '@/pages/index',
     name: '项目首页',
+    icon: 'AreaChartOutlined',
   },
   {
     path: '/test',
     component: '@/pages/test/index',
     name: '测试',
+    icon: 'GitlabOutlined',
   },
   {
     path: '/stu',
     name: '学员管理',
+    icon: 'AliwangwangOutlined',
     routes: [
       {
         path: '/stu/list',
@@ -29,6 +32,7 @@ export default [
   {
     path: '/cate',
     name: '分类管理',
+    icon: 'WindowsOutlined',
     routes: [
       {
         path: '/cate/list',
@@ -45,6 +49,7 @@ export default [
   {
     path: '/banner',
     name: '轮播管理',
+    icon: 'RadarChartOutlined',
     routes: [
       {
         path: '/banner/list',
