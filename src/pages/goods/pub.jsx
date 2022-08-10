@@ -2,7 +2,9 @@ import { Button, Form, Input, Spin, Select } from 'antd';
 import { cateGet } from '@/api/cake';
 import React from 'react';
 import { useRequest } from 'umi';
-
+import '@wangeditor/editor/dist/css/style.css'; // 引入 css
+import { Editor, Toolbar } from '@wangeditor/editor-for-react';
+import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
 const { Option } = Select;
 
 const layout = {
@@ -62,6 +64,21 @@ const GoodsPub = () => {
               return <Option value={item.objectId}>{item.catename}</Option>;
             })}
           </Select>
+        </Form.Item>
+
+        <Form.Item
+          name="detail"
+          label="商品详情"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <div>
+            <Toolbar />
+            <Editor />
+          </div>
         </Form.Item>
 
         <Form.Item {...tailLayout}>
