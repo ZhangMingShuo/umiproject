@@ -5,6 +5,7 @@ import { useRequest } from 'umi';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
+import RichEditor from '../../components/RichEditor';
 const { Option } = Select;
 
 const layout = {
@@ -61,7 +62,11 @@ const GoodsPub = () => {
             onChange={handleChange}
           >
             {data?.map((item) => {
-              return <Option value={item.objectId}>{item.catename}</Option>;
+              return (
+                <Option value={item.objectId} key={item.objectId}>
+                  {item.catename}
+                </Option>
+              );
             })}
           </Select>
         </Form.Item>
@@ -75,10 +80,7 @@ const GoodsPub = () => {
             },
           ]}
         >
-          <div>
-            <Toolbar />
-            <Editor />
-          </div>
+          <RichEditor />
         </Form.Item>
 
         <Form.Item {...tailLayout}>
