@@ -1,10 +1,8 @@
 import { Button, Form, Input, Spin } from 'antd';
-import { bannerAdd } from '@/api/cake';
 import React, { useEffect } from 'react';
-import { useRequest } from 'umi';
+import { useRequest, history } from 'umi';
 import ImageUpload from '../../components/ImgUpload';
-import { bannerUpdate } from '../../api/cake';
-
+import { bannerAdd, bannerUpdate } from '../../api/cake';
 const layout = {
   labelCol: {
     span: 6,
@@ -21,10 +19,13 @@ const tailLayout = {
 };
 
 const BannerEdit = (props) => {
-  console.log('BannerEdit----------------');
+  // console.log('BannerEdit----------------');
+
   const [form] = Form.useForm(); //表单数据域
+
   let { query } = props.location;
-  console.log('query comes from record of list:', query);
+  // console.log('query comes from record of list:', query);
+
   let { data, loading, run } = useRequest(
     (value) => {
       // console.log('useRequest执行了',value);
@@ -32,6 +33,7 @@ const BannerEdit = (props) => {
     },
     { manual: true },
   ); //开启手动执行
+
   const onFinish = (values) => {
     run(values);
     // console.log('values:', values);
@@ -51,17 +53,27 @@ const BannerEdit = (props) => {
   useEffect(() => {
     //didmount didupdate
 
-    console.log('------------------- useEffect --------------------');
-    console.log('banner edit useEffect BannerEdit props:', props);
-    console.log('banner edit useEffect BannerEdit query:', query);
+    // console.log('------------------- useEffect --------------------');
+    // console.log('banner edit useEffect BannerEdit props:', props);
+    // console.log('banner edit useEffect BannerEdit query:', query);
     //TODO
     // const {imgurl} = query;
     // console.log('imgurl:',imgurl);
     // const url = imgurl;
+    // console.log('query.imgurl:', query.imgurl);
+    form.setFieldsValue(query);
   }, []);
 
-  console.log('query.imgurl:', query.imgurl);
-  form.setFieldsValue(query);
+  useEffect(() => {
+    console.log('bannerEdit的data变化了');
+    if (data) {
+      //已经更新成功
+      // history.push('/banner/list')
+      history.goBack();
+    }
+  }, [data]); //监听data
+
+  console.log('bannerEdit页面的props', data);
 
   //表单初始值
   let initData = {

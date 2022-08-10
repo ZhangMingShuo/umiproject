@@ -32,14 +32,14 @@ class ImageUpload extends React.Component {
   };
 
   customUpload = (info) => {
-    console.log(info);
+    // console.log(info);
     this.setState({ loading: true }); //未上传完成设置loading为true
     getBase64(info.file, (base64) => {
-      console.log(base64);
+      // console.log(base64);
       const file = new Cloud.File('cakeimg.png', { base64 }); //调用LeanCloud SDK
-      console.log(file.name());
+      // console.log(file.name());
       file.save().then((res) => {
-        console.log(res);
+        // console.log(res);
         let { url } = res.attributes;
         this.props.onChange(url); //把图片链接从自定义组件传到父组件,上传表单组件,onChange是Form内置的函数
         this.setState({
@@ -56,7 +56,7 @@ class ImageUpload extends React.Component {
     // console.log('ImgUpload this.state : ',this.state);
     const { loading, imgurl } = this.state;
     // console.log('loading:',loading);
-    console.log('ImgUpload的imgurl:', this.props.imgurl);
+    // console.log('ImgUpload的imgurl:', this.props.imgurl);
     // console.log('ImgUpload组件的props', this.props);
     const uploadButton = (
       <div>
