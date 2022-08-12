@@ -20,6 +20,13 @@ export default {
         read: false,
       },
     ],
-    total: 3,
+  },
+  reducers: {
+    readed(state, action) {
+      let { payload } = action;
+      state.list[payload].read = true;
+      console.log(state);
+      return { ...state };
+    },
   },
 };

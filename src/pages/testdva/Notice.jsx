@@ -9,15 +9,29 @@ import { connect } from 'umi';
 //   },
 // ];
 function Notice(props) {
+  let handleRead = (idx) => {
+    props.dispatch({
+      type: 'notice/readed',
+      payload: idx,
+    });
+    console.log(idx);
+  };
   return (
     <List
       className="demo-loadmore-list"
       itemLayout="horizontal"
       dataSource={props.notice.list}
-      renderItem={(item) => (
+      renderItem={(item, index) => (
         <List.Item
           actions={[
-            <Button type="primary" size="small" disabled={item.read}>
+            <Button
+              onClick={() => {
+                handleRead(index);
+              }}
+              type="primary"
+              size="small"
+              disabled={item.read}
+            >
               {item.read ? '已读' : '未读'}
             </Button>,
           ]}
