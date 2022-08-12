@@ -22,8 +22,13 @@ export const request = {
       // console.log('响应拦截器', res, options);
       if (res.objectId) {
         let method = options.method.toLowerCase();
-        let msg = method == 'post' ? '新增成功' : '更新成功';
-        message.success(msg);
+        if (method == 'post' && res.sessionToken) {
+          //根据LeanCloud登录时返回的数据包做登录逻辑
+          message.success('登录成功');
+        } else {
+          let msg = method == 'post' ? '新增成功' : '更新成功';
+          message.success(msg);
+        }
       }
       let { results } = res;
       let data = results ? results : res;
