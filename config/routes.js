@@ -93,4 +93,21 @@ export default [
       },
     ],
   },
+  {
+    path: '/dva',
+    name: '状态管理',
+    icon: 'CodeSandboxOutlined',
+    routes: [
+      {
+        path: '/dva/a',
+        component: '@/pages/testdva/CompA',
+        name: 'A组件',
+      },
+      {
+        path: '/dva/b',
+        component: '@/pages/testdva/CompB',
+        name: 'B组件',
+      },
+    ],
+  },
 ];
