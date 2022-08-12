@@ -3,6 +3,7 @@ import { leancloudConfig } from '@/secrets';
 import { message } from 'antd';
 import { history } from 'umi';
 import './utils/init-leancloud-sdk';
+import HeaderDropMenu from '@/components/HeaderDropMenu';
 // 异步请求相关运行时配置
 export const request = {
   requestInterceptors: [
@@ -68,5 +69,7 @@ export const layout = ({ initialState }) => {
         history.push('/login');
       }
     },
+    //https://procomponents.ant.design/components/layout#api
+    rightContentRender: () => <HeaderDropMenu />,
   };
 };
