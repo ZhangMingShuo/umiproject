@@ -1,6 +1,12 @@
 export default [
   //配置式路由
   {
+    path: '/login',
+    component: '@/pages/login/index',
+    name: '登录',
+    layout: false,
+  },
+  {
     path: '/',
     component: '@/pages/index',
     name: '项目首页',
