@@ -44,7 +44,14 @@ export async function getInitialState() {
     isLogin: false,
     userInfo: null,
   };
-
+  let info =
+    localStorage.getItem('userInfo') || sessionStorage.getItem('userInfo');
+  if (info) {
+    userState = {
+      isLogin: true,
+      userInfo: JSON.parse(info),
+    };
+  }
   // const data = await fetchXXX();
   console.log('getInitialState', userState);
   return userState;

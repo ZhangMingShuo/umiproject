@@ -1,11 +1,13 @@
 import { Button, Checkbox, Form, Input, Card, Row, Col, Spin } from 'antd';
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { useModel, history, useRequest } from 'umi';
 import { userLogin } from '@/api/user';
 
 const Login = () => {
   const { initialState, setInitialState } = useModel('@@initialState'); //修改
+  let [remember, setRemember] = useState(false);
+
   let { data, loading, run } = useRequest(userLogin, {
     manual: true,
   }); //ahooks docs
@@ -14,6 +16,7 @@ const Login = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
     run(values);
+    setRemember(values.remember);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -22,6 +25,13 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
+      if (remember) {
+        //若用户点击记住密码则存储在localStorage
+        localStorage.setItem('userInfo', JSON.stringify(data));
+      } else {
+        //为选中记住密码存储在sessionStorage
+        sessionStorage.setItem('userInfo', JSON.stringify(data));
+      }
       //修改全局的initialState,让Layout有机会进入主面板
       setInitialState({
         //更新本地initialState,重新触发权限判断
@@ -32,14 +42,14 @@ const Login = () => {
       //触发路由切换('/')
       setTimeout(() => {
         history.push('/');
-      }, 1000);
+      }, 200);
     }
   }, [data]);
 
   let initData = {
     username: '张三丰',
     password: '123',
-    remember: true,
+    remember,
   };
   return (
     <Row align="middle" style={{ height: '100vh', background: '#f6f6f6' }}>
