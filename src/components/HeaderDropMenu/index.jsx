@@ -1,9 +1,9 @@
 import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Menu, message, Space, Tooltip } from 'antd';
 import React from 'react';
-import { useModel, history } from 'umi';
+import { useModel, history, connect } from 'umi';
 
-export default () => {
+const HeaderDropMenu = (props) => {
   const { initialState, setInitialState } = useModel('@@initialState'); //Hooks can only be called inside of the body of a function component
   function handleMenuClick({ key }) {
     if (key === '2') {
@@ -39,7 +39,14 @@ export default () => {
   return (
     <Space wrap>
       <Dropdown.Button overlay={menu}>Dropdown</Dropdown.Button>
+      {
+        props.notice.list.filter((item) => {
+          return !item.read;
+        }).length
+      }
     </Space>
   );
 };
 //https://ant.design/components/dropdown-cn/
+
+export default connect(({ notice }) => ({ notice }))(HeaderDropMenu);
