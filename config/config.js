@@ -15,7 +15,7 @@ export default defineConfig({
     layout: 'side',
   },
   dva: {
-    immer: false,
+    immer: true,
   },
   routes,
   fastRefresh: {},

@@ -1,3 +1,4 @@
+import { produce } from 'immer';
 export default {
   state: {
     list: [
@@ -24,9 +25,10 @@ export default {
   reducers: {
     readed(state, action) {
       let { payload } = action;
-      state.list[payload].read = true;
-      console.log(state);
-      return { ...state };
+      let obj = produce(state, (draft) => {
+        draft.list[payload].read = true;
+      });
+      return obj;
     },
   },
 };
