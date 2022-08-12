@@ -1,15 +1,32 @@
 import { Button, Checkbox, Form, Input, Card, Row, Col } from 'antd';
 import React from 'react';
+import { useModel, history } from 'umi';
 
 const Login = () => {
+  const { initialState, setInitialState } = useModel('@@initialState'); //修改
+
   const onFinish = (values) => {
+    //修改全局的initialState,让Layout有机会进入主面板
+    setInitialState({
+      isLogin: true,
+      userInfo: values,
+    });
     console.log('Success:', values);
+    //触发路由切换('/')
+    setTimeout(() => {
+      history.push('/');
+    }, 1000);
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
+  let initData = {
+    username: '张三丰',
+    password: '123',
+    remember: true,
+  };
   return (
     <Row align="middle" style={{ height: '100vh', background: '#f6f6f6' }}>
       <Col span={8} offset={8}>
@@ -22,9 +39,7 @@ const Login = () => {
             wrapperCol={{
               span: 20,
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={initData}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -73,7 +88,7 @@ const Login = () => {
               }}
             >
               <Button type="primary" htmlType="submit">
-                Submit
+                登录
               </Button>
             </Form.Item>
           </Form>
