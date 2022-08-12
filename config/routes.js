@@ -108,6 +108,11 @@ export default [
         component: '@/pages/testdva/CompB',
         name: 'B组件',
       },
+      {
+        path: '/dva/notice',
+        component: '@/pages/testdva/Notice',
+        name: '消息中心',
+      },
     ],
   },
 ];
