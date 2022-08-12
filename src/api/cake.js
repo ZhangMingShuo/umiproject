@@ -39,3 +39,20 @@ export const goodsAdd = (cakeObj) => {
     data: cakeObj,
   });
 };
+
+export const goodsExchange = (cakelist, values) => {
+  //商品自动转存
+  let batchObj = { requests: [] };
+  cakelist.forEach((item) => {
+    batchObj.requests.push({
+      method: 'POST',
+      path: '/1.1/classes/CakeGoods',
+      body: { ...item, ...values },
+    });
+  });
+
+  return request('/batch', {
+    method: 'POST',
+    data: batchObj,
+  });
+};

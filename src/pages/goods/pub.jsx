@@ -1,5 +1,5 @@
 import { Button, Form, Input, Spin, Select } from 'antd';
-import { cateGet, goodsAdd } from '@/api/cake';
+import { cateGet, goodsAdd, goodsExchange } from '@/api/cake';
 import React from 'react';
 import { request, useRequest } from 'umi';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
@@ -42,7 +42,12 @@ const GoodsPub = () => {
         version: mcakeConfig.version,
       },
     }).then((res) => {
-      console.log(res);
+      if (res.data.code == -996) {
+        console.log(res.data.msg);
+      } else {
+        console.log(res);
+        goodsExchange(res.data.data.list, values);
+      }
     });
     // goodsAdd(values).then(res=>{
     //   console.log(res);
