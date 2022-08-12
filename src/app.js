@@ -1,6 +1,7 @@
 // umi 运行时配置
 import { leancloudConfig } from '@/secrets';
 import { message } from 'antd';
+import { history } from 'umi';
 import './utils/init-leancloud-sdk';
 // 异步请求相关运行时配置
 export const request = {
@@ -29,4 +30,31 @@ export const request = {
       return { data };
     },
   ],
+};
+
+//初始化全局配置的运行时配置
+export async function getInitialState() {
+  //用户登录状态
+  let userState = {
+    isLogin: false,
+    userInfo: null,
+  };
+
+  // const data = await fetchXXX();
+  console.log('getInitialState', userState);
+  return userState;
+}
+
+//layout运行时配置,自定义控制layout的渲染逻辑
+export const layout = ({ initialState }) => {
+  //自动透传
+  return {
+    onPageChange: () => {
+      console.log('onPageChange', initialState);
+      let { isLogin } = initialState;
+      if (!isLogin) {
+        history.push('/login');
+      }
+    },
+  };
 };
