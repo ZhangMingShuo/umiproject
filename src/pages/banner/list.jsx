@@ -1,9 +1,11 @@
 import { Button, Space, Table, Image } from 'antd';
 import React from 'react';
 import { bannerGet } from '@/api/cake';
-import { useRequest, history } from 'umi';
+import { useRequest, history, useAccess } from 'umi';
 
 export default function BannerList() {
+  let access = useAccess();
+  console.log('bannerList权限信息', access);
   const columns = [
     {
       title: 'ID',
@@ -33,7 +35,7 @@ export default function BannerList() {
       render: (url) => <Image src={url} height={50} />,
     },
     {
-      title: '操作区域',
+      title: '操作',
       key: 'action',
       render: (text, record, index) => (
         <Space size="middle">
@@ -41,6 +43,7 @@ export default function BannerList() {
             type="primary"
             shape="round"
             size="small"
+            disabled={!access.isRoot}
             onClick={() => {
               // console.log("进入编辑详情页")
               //使用history的push方法完成跳转,需要把当前待编辑的数据包通过路由传参带到下一个页面
