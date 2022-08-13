@@ -10,8 +10,9 @@ export default [
   {
     path: '/',
     component: '@/pages/index',
-    name: '项目首页',
+    name: '数据统计',
     icon: 'AreaChartOutlined',
+    access: 'isRoot',
   },
   {
     path: '/test',
