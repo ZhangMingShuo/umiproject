@@ -41,16 +41,19 @@ export default [
     path: '/cate',
     name: '分类管理',
     icon: 'WindowsOutlined',
+    access: 'isAdmin',
     routes: [
       {
         path: '/cate/list',
         component: '@/pages/category/catelist',
         name: '分类列表',
+        access: 'isAdmin',
       },
       {
         path: '/cate/pub',
         component: '@/pages/category/catepub',
         name: '分类发布',
+        access: 'isRoot',
       },
     ],
   },
@@ -58,6 +61,7 @@ export default [
     path: '/banner',
     name: '轮播管理',
     icon: 'RadarChartOutlined',
+    access: 'isAdmin',
     routes: [
       {
         path: '/banner/list',
@@ -80,6 +84,7 @@ export default [
   {
     path: '/goods',
     name: '商品管理',
+    access: 'isAdmin',
     icon: 'CodeSandboxOutlined',
     routes: [
       {
@@ -120,6 +125,7 @@ export default [
     path: '/sys',
     name: '系统设置',
     icon: 'SettingOutlined',
+    access: 'isRoot',
     routes: [
       {
         path: '/sys/role',
