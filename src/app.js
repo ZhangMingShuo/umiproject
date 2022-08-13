@@ -6,6 +6,7 @@ import './utils/init-leancloud-sdk';
 import HeaderDropMenu from '@/components/HeaderDropMenu';
 // 异步请求相关运行时配置
 export const request = {
+  // timeout:1000,//一秒请求
   requestInterceptors: [
     //请求拦截
     (url, options) => {
@@ -24,8 +25,10 @@ export const request = {
       if (res.objectId) {
         let method = options.method.toLowerCase();
         if (method == 'post' && res.sessionToken) {
+          let msg =
+            options.url.indexOf('/login') == -1 ? '账号分配成功' : '登录成功';
           //根据LeanCloud登录时返回的数据包做登录逻辑
-          message.success('登录成功');
+          message.success(msg);
         } else {
           let msg = method == 'post' ? '新增成功' : '更新成功';
           message.success(msg);
