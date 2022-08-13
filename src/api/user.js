@@ -5,3 +5,11 @@ export const userLogin = (user) => {
     data: user,
   });
 };
+
+//角色新增
+export const roleAdd = (roleObj) => {
+  return request('/classes/CakeRole', {
+    method: 'POST',
+    data: roleObj,
+  });
+};

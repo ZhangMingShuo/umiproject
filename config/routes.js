@@ -115,4 +115,21 @@ export default [
       },
     ],
   },
+  {
+    path: '/sys',
+    name: '系统设置',
+    icon: 'SettingOutlined',
+    routes: [
+      {
+        path: '/sys/role',
+        component: '@/pages/system/RoleManager',
+        name: '角色管理',
+      },
+      {
+        path: '/sys/user',
+        component: '@/pages/system/UserManager',
+        name: '账号管理',
+      },
+    ],
+  },
 ];
